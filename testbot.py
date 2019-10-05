@@ -12,7 +12,7 @@
 
 
 import praw
-import os
+
 
 # Create the Reddit instance.
 reddit = praw.Reddit('MSPaintFlagBot')
