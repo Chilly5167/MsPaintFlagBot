@@ -56,14 +56,18 @@ for submission in posts:
     if submission.id not in myself.saved():
         
         # Replies to the current post using the post number
-        submission.reply('Post number {} in r/mspaintflags'.format(post_number))
-        print("Bot replying to : {} using number {}".format(submission.title, post_number))
+        try:
+            submission.reply('Post number {} in r/mspaintflags'.format(post_number))
+            print("Bot replying to : {} using number {}".format(submission.title, post_number))
 
-        # Saves the current submission to the bot's account
-        submission.save()
-        print('{} has been saved.'.format(submission.title))
+            # Saves the current submission to the bot's account
+            submission.save()
+            print('{} has been saved.'.format(submission.title))
 
-        # Updates the post number and replies to the bots post that keeps
-        # track of post numbers
-        post_number += 1
-        my_post.reply('{}'.format(post_number))
+            # Updates the post number and replies to the bots post that keeps
+            # track of post numbers
+            post_number += 1
+            my_post.reply('{}'.format(post_number))
+        # If the ratelimit has been exceded
+        except praw.exceptions.APIException as error:
+            print('There was an error: {}'.format(error))
