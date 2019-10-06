@@ -70,4 +70,4 @@ for submission in posts:
             my_post.reply('{}'.format(post_number))
         # If the ratelimit has been exceded
         except praw.exceptions.APIException as error:
-            print('There was an error: {}'.format(error))
+            print('There was an error with the bot: {}'.format(error))
