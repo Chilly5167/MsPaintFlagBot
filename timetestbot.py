@@ -73,20 +73,24 @@ for submission in posts:
                 # track of post numbers
                 post_number += 1
                 my_post.reply('{}'.format(post_number))
-                
-                # If the ratelimit has been exceded
-                except praw.exceptions.APIException as error:
-                    print('There was an error: {}'.format(error))
-                    error = list(str(error))
-                    for item in error:
-                        if item.isdecimal():
-                            seconds = int(item)
-                    minutes = wait_seconds * 60
-                    print('The bot will now wait {} minutes or {} seconds'.format(minutes, seconds))
-                    for second in range(seconds):
-                        time.sleep(1)
-            else:
+
                 result = submission.title
+                
+            # If the ratelimit has been exceded
+            except praw.exceptions.APIException as error:
+                print('There was an error with the bot: {}'.format(error))
+                error = list(str(error))
+                for item in error:
+                    if item.isdecimal():
+                        minutes = int(item)
+                seconds = minutes * 60
+                more_seconds = seconds + 60
+                print('The bot will now wait {} minutes which is {} seconds but this bot '
+                      'will wait for {} seconds'.format(minutes, seconds, more_seconds))
+                for second in range(more_seconds):
+                    time.sleep(1)
+        else:
+            result = submission.title
                 
             
 
