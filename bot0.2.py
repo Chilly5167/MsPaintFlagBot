@@ -44,6 +44,8 @@ for post in subreddit.new(limit=5):
 for submission in posts:
     print(submission.title)
 
+    # A loop that trys to comment and if it cant because of a ratelimit
+    # error it will wait until it can try again until it has commented
     result = None
     while result is None:
     
@@ -71,13 +73,17 @@ for submission in posts:
             except praw.exceptions.APIException as error:
                 print('There was an error with the bot: {}'.format(error))
                 error = list(str(error))
+                # checks for the number in the error message
+                # which tells the program how many minutes to wait
                 for item in error:
                     if item.isdecimal():
                         minutes = int(item)
                 seconds = minutes * 60
                 more_seconds = seconds + 60
+                # Waits how long is reccommended from the error + 1 minute to be safe
                 print('The bot should wait {} minutes which is {} seconds but this bot '
                       'will wait for {} seconds'.format(minutes, seconds, more_seconds))
+                # Looping alows you to keyboard interupt the program
                 for second in range(more_seconds):
                     time.sleep(1)
         else:
