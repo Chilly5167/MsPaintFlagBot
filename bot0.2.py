@@ -5,6 +5,7 @@
 # version 0.2
 
 import praw
+import time
 
 
 # Create the Reddit instance.
