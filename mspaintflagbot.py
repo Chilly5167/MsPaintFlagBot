@@ -1,8 +1,8 @@
 #! python3
-# MSPaintFLagBot - Reddit bot that keeps track of the number of posts
+# mspaintflagbot.py - Reddit bot that keeps track of the number of posts
 # in r/mspaintflags and comments that number on each new post.
 # the account is thelegend3l
-# version 0.2
+
 
 import praw
 import time
