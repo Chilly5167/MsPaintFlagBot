@@ -1,7 +1,10 @@
 # MSPaintFlagBot
 Reddit bot that keeps track of the number of posts in r/mspaintflags and comments that number on each new post.
+
 The reddit name for the bot is u/thelegend3l
-It is hosted on pythonanywhere.com and is set to run once daily.
+
+
+It is hosted on [pythonanywhere.com](https://www.pythonanywhere.com "pythonanywhere.com") and is set to run once daily.
 When it runs it checks the 5 newest posts in the subreddit and if any of the posts have not been saved then it comments the current post number.
 It uses the accounts saved posts to keep track of posts that it has commented on.
 It has a post dedicated to keeping track of the current post number in r/mspaintflags.
