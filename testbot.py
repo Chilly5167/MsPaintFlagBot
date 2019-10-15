@@ -12,6 +12,7 @@
 
 
 import praw
+import time
 
 
 # Create the Reddit instance.
@@ -48,26 +49,48 @@ for post in subreddit.new(limit=5):
 
 # For each of the 5 posts this code runs.
 # BTW I used submission instead of post so it is easier to distinguish.
+
 for submission in posts:
     print(submission.title)
+
+    result = None
+    while result is None:
     
-    # The posts that the bot has already replied to are saved to the bot's
-    # account. If the submission has not been saved...
-    if submission.id not in myself.saved():
-        
-        # Replies to the current post using the post number
-        try:
-            submission.reply('Post number {} in r/mspaintflags'.format(post_number))
-            print("Bot replying to : {} using number {}".format(submission.title, post_number))
+        # The posts that the bot has already replied to are saved to the bot's
+        # account. If the submission has not been saved...
+        if submission.id not in myself.saved():
+            
+            # Replies to the current post using the post number
+            try:
+                submission.reply('Post number {} in r/mspaintflags'.format(post_number))
+                print("Bot replying to : {} using number {}".format(submission.title, post_number))
 
-            # Saves the current submission to the bot's account
-            submission.save()
-            print('{} has been saved.'.format(submission.title))
+                # Saves the current submission to the bot's account
+                submission.save()
+                print('{} has been saved.'.format(submission.title))
 
-            # Updates the post number and replies to the bots post that keeps
-            # track of post numbers
-            post_number += 1
-            my_post.reply('{}'.format(post_number))
-        # If the ratelimit has been exceded
-        except praw.exceptions.APIException as error:
-            print('There was an error with the bot: {}'.format(error))
+                # Updates the post number and replies to the bots post that keeps
+                # track of post numbers
+                post_number += 1
+                my_post.reply('{}'.format(post_number))
+
+                result = submission.title
+                
+            # If the ratelimit has been exceded
+            except praw.exceptions.APIException as error:
+                print('There was an error with the bot: {}'.format(error))
+                error = list(str(error))
+                for item in error:
+                    if item.isdecimal():
+                        minutes = int(item)
+                seconds = minutes * 60
+                more_seconds = seconds + 60
+                print('The bot will now wait {} minutes which is {} seconds but this bot '
+                      'will wait for {} seconds'.format(minutes, seconds, more_seconds))
+                for second in range(more_seconds):
+                    time.sleep(1)
+        else:
+            result = submission.title
+                
+            
+
