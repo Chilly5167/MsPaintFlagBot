@@ -90,6 +90,8 @@ for submission in posts:
         else:
             result = submission.title
 
+# This opens a log text file and each time the code is successfully completed
+# It writes the time that it completed its task
 logfile = open('/home/pi/bot/logfile.txt', 'a')
 dt = datetime.datetime.now()
 logfile.write('Successfull run at {}:{} {}/{}/{}\n'.format(dt.hour, dt.minute, dt.year, dt.month, dt.day))
