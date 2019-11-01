@@ -3,7 +3,9 @@
 
 The reddit account for the bot is u/thelegend3l
 
-It is hosted on [pythonanywhere.com](https://www.pythonanywhere.com "pythonanywhere.com") and is set to run once daily.
+It used to be hosted on [pythonanywhere.com](https://www.pythonanywhere.com "pythonanywhere.com") and was set to run once daily.
+
+Now it is automated with crontab to run once an hour on a raspberry pi zero W.
 
 When it runs it checks the 5 newest posts in the subreddit and if any of the posts have not been saved then it comments the current post number.
 
@@ -15,4 +17,4 @@ Each time it comments on a post it also comments on its own post with the next n
 
 This means that the bot doesnt have to rely on saved files to keep track and instead uses reddit to store information.
 
-##### This is my first bot and it has been a pretty cool learning experience.
+This is my first bot and it has been a pretty cool learning experience.
